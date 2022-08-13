@@ -1,7 +1,7 @@
 /*  Frequency Counter Pattern
     This pattern uses objects or sets to collect values/frequencies of values.
     This can often avoid the need for nested loops or O(n^2) operations with arrays or strings.
- */
+*/
 
 /*  Write a function called same, which accepts two arrays. The function should return true if every value in the array
     has its corresponding squared value in the second array. The frequency of values must be the same. Order mix up is ok.
@@ -24,7 +24,7 @@
 //   return true
 // }
 
-// Efficient solution
+//***  Efficient solution
 function same(arr1, arr2) {
   if (arr1.length !== arr2.length) {
     return false
