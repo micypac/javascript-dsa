@@ -1,10 +1,11 @@
 /*
-Write a function called sumZero which accepts a sorted array of integers.
-The function should find the first pair of intergers where the sum is zero.
-Return an array that includes both values that sum to zero or undefined if the pair does not exist.
+  SLIDING WINDOW PATTERN
+  Write a function called sumZero which accepts a sorted array of integers.
+  The function should find the first pair of intergers where the sum is zero.
+  Return an array that includes both values that sum to zero or undefined if the pair does not exist.
 
-sumZero([-3,-2,-1,0,1,2,3]) -> [-3,3]
-sumZero([-2,0,1,3]) -> undefined
+  sumZero([-3,-2,-1,0,1,2,3]) -> [-3,3]
+  sumZero([-2,0,1,3]) -> undefined
 */
 
 //*** Naive solution O(n^2)

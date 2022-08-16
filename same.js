@@ -1,6 +1,7 @@
-/*  Frequency Counter Pattern
-    This pattern uses objects or sets to collect values/frequencies of values.
-    This can often avoid the need for nested loops or O(n^2) operations with arrays or strings.
+/*  
+  FREQUENCY COUNTER PATTERN
+  This pattern uses objects or sets to collect values/frequencies of values.
+  This can often avoid the need for nested loops or O(n^2) operations with arrays or strings.
 */
 
 /*  Write a function called same, which accepts two arrays. The function should return true if every value in the array
