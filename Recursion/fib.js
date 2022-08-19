@@ -10,11 +10,17 @@
   fib(35) // 9227465
 */
 
-const fib = (num) => {
-  if (num === 0) return 0
-  if (num === 1) return 1
+// const fib = (num) => {
+//   if (num === 0) return 0
+//   if (num === 1) return 1
 
-  return fib(num - 2) + fib(num - 1)
+//   return fib(num - 2) + fib(num - 1)
+// }
+
+//*** Colt solution.
+function fib(n) {
+  if (n <= 2) return 1
+  return fib(n - 1) + fib(n - 2)
 }
 
-console.log(fib(5))
+console.log(fib(10))
