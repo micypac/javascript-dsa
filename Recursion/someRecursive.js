@@ -12,12 +12,19 @@
   someRecursive([4,6,8], val => val > 10); // false
 */
 
-const someRecursive = (arr, cb) => {
-  if (arr.length === 0) {
-    return false
-  }
+// const someRecursive = (arr, cb) => {
+//   if (arr.length === 0) {
+//     return false
+//   }
 
-  return cb(arr[0]) || someRecursive(arr.slice(1), cb)
+//   return cb(arr[0]) || someRecursive(arr.slice(1), cb)
+// }
+
+//*** Course solution
+const someRecursive = (arr, cb) => {
+  if (array.length === 0) return false
+  if (callback(array[0])) return true
+  return someRecursive(array.slice(1), callback)
 }
 
 const isOdd = (val) => val % 2 !== 0

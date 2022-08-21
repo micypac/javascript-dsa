@@ -7,24 +7,37 @@
   flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]) // [1,2,3
 */
 
-const flattern = (arr) => {
-  const result = []
+// const flattern = (arr) => {
+//   const result = []
 
-  const helperFunc = (helperInput) => {
-    if (helperInput.length === 0) {
-      return
-    }
+//   const helperFunc = (helperInput) => {
+//     if (helperInput.length === 0) {
+//       return
+//     }
 
-    if (Array.isArray(helperInput[0])) {
-      helperFunc(helperInput[0])
+//     if (Array.isArray(helperInput[0])) {
+//       helperFunc(helperInput[0])
+//     } else {
+//       result.push(helperInput[0])
+//     }
+//     helperFunc(helperInput.slice(1))
+//   }
+
+//   helperFunc(arr)
+//   return result
+// }
+
+//*** Course solution
+const flatten = (oldArr) => {
+  let newArr = []
+  for (let i = 0; i < oldArr.length; i++) {
+    if (Array.isArray(oldArr[i])) {
+      newArr = newArr.concat(flatten(oldArr[i]))
     } else {
-      result.push(helperInput[0])
+      newArr.push(oldArr[i])
     }
-    helperFunc(helperInput.slice(1))
   }
-
-  helperFunc(arr)
-  return result
+  return newArr
 }
 
-console.log(flattern([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]))
+console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]]))
