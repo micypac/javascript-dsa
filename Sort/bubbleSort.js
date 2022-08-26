@@ -22,4 +22,8 @@ const bubbleSort = (arr) => {
   return arr
 }
 
-console.log(bubbleSort([5, 3, 6, 4, 7, 2, 1, 8]))
+// let data = Array.apply(null, { length: 10 }).map(Function.call, Math.random)
+let data = Array.apply(null, { length: 10 }).map((item) => Math.random())
+
+// console.log(bubbleSort([5, 3, 6, 4, 7, 2, 1, 8]))
+console.log(bubbleSort(data))
