@@ -1,5 +1,5 @@
 /*
-  PSEUDOCODE
+  Quick Sort
 
   - in order to implement quick sort, its useful to first implement a function responsible arranging elements 
     in an array on either side of a pivot
@@ -25,7 +25,7 @@ const pivot = (arr, start = 0, end = arr.length - 1) => {
     let temp = arr[idx1]
     arr[idx1] = arr[idx2]
     arr[idx2] = temp
-    // ;[arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]
+    // [arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]
   }
 
   // we are assuming the pivot is always the first element
