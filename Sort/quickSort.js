@@ -41,7 +41,18 @@ const pivot = (arr, start = 0, end = arr.length - 1) => {
 
   // swap the pivot from the start to the swap point
   swap(arr, start, swapIdx)
+  // console.log(arr)
   return swapIdx
 }
 
-console.log(pivot([4, 8, 2, 1, 5, 7, 6, 3]))
+const quickSort = (arr, left = 0, right = arr.length - 1) => {
+  if (left < right) {
+    let pivotIdx = pivot(arr, left, right)
+    quickSort(arr, left, pivotIdx - 1)
+    quickSort(arr, pivotIdx + 1, right)
+  }
+
+  return arr
+}
+
+console.log(quickSort([4, 8, 2, 1, 5, 7, 6, 3]))
