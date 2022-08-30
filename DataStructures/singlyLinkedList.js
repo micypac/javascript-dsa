@@ -139,6 +139,33 @@ class SinglyLinkedList {
     return true
   }
 
+  /*
+    insert pseudocode
+    - if the index is less than zero or greater than length, return false
+    - if the index is same as length, push new node to the end of the list
+    - if the index is zero, unshift new node to the beginning of the list
+    - otherwise, using the get method, access the node at "index - 1"
+    - set the next property on that node to be the new node
+    - set the next property on the new node to be the previous next
+    - increment length
+    - return true
+  */
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length) return false
+    if (idx === this.length) {
+      this.push(val)
+    } else if (idx === 0) {
+      this.unshift(val)
+    } else {
+      let newNode = new Node(val)
+      let prevNode = this.get(idx - 1)
+      newNode.next = prevNode.next
+      prevNode.next = newNode
+      this.length++
+    }
+    return true
+  }
+
   traverse() {
     let current = this.head
     while (current) {
