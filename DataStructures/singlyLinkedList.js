@@ -13,7 +13,7 @@ class SinglyLinkedList {
   }
 
   /*
-    pushing pseudocode
+    push pseudocode
     - this function should accept a value
     - create a new node using the value passed to the function
     - if there is no head property on the list, set the head and tail to be the newly created node
@@ -37,7 +37,7 @@ class SinglyLinkedList {
   }
 
   /*
-    popping pseudocode
+    pop pseudocode
     - if there are no nodes in the list, return undefined
     - loop through the list until you reached the tail
     - set the next property of the 2nd to last node to be null
@@ -66,6 +66,27 @@ class SinglyLinkedList {
     return current.val
   }
 
+  /*
+    shift pseudocode
+    - if there are no node, return undeifned
+    - store the current head property in a variable
+    - set the head property to be the current head's next property
+    - decrement length by 1
+    - return value of the node removed
+  */
+
+  shift() {
+    if (!this.head) return undefined
+
+    let shifted = this.head
+    this.head = this.head.next
+    this.length--
+    if (this.length === 0) {
+      this.tail = null
+    }
+    return shifted.val
+  }
+
   traverse() {
     let current = this.head
     while (current) {
@@ -75,19 +96,19 @@ class SinglyLinkedList {
   }
 }
 
-const myList = new SinglyLinkedList()
-myList.push('monica')
-myList.push('jenny')
-myList.push('jerlyn')
-myList.push('marissa')
+// const myList = new SinglyLinkedList()
+// myList.push('monica')
+// myList.push('jenny')
+// myList.push('jerlyn')
+// myList.push('marissa')
 
-myList.traverse()
+// myList.traverse()
 
-let pop1 = myList.pop()
-console.log('pop', pop1)
-myList.traverse()
-myList.pop()
-myList.pop()
-myList.pop()
+// let pop1 = myList.pop()
+// console.log('pop', pop1)
+// myList.traverse()
+// myList.pop()
+// myList.pop()
+// myList.pop()
 
-console.log(myList)
+// console.log(myList)
