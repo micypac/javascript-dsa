@@ -192,6 +192,35 @@ class SinglyLinkedList {
     }
   }
 
+  /*
+    reverse pseudocode
+    - create a variable called "current" and initialize it to the head property
+    - swap the head and tail
+    - create a variable called "next"
+    - create a variable called "prev" and set it to null
+    - loop though the list
+    - set "next" to be the next property on whatever "current" is
+    - set the next property on the "current" to be whtever "prev" is
+    - set "prev" to be the value of the "current" variable
+    - set the "current" variable to be the value of the "next" variable
+  */
+  reverse() {
+    let currentNode = this.head
+    let nextNode
+    let prevNode = null
+    // swap head and tail
+    this.head = this.tail
+    this.tail = currentNode
+
+    while (currentNode) {
+      nextNode = currentNode.next
+      currentNode.next = prevNode
+      prevNode = currentNode
+      currentNode = nextNode
+    }
+    return this
+  }
+
   traverse() {
     let current = this.head
     while (current) {
