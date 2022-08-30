@@ -119,9 +119,24 @@ class SinglyLinkedList {
     if (idx < 0 || idx >= this.length) return null
     let current = this.head
     for (let i = 0; i < this.length; i++) {
-      if (i === idx) return current
+      if (i === idx) break
       current = current.next
     }
+    return current
+  }
+
+  /*
+    set pseudocode
+    - this function should accept an index and a value
+    - use get function to find specific node
+    - if node is not found, return false
+    - if found, set the value of that node to be the parameter received and return true
+  */
+  set(idx, val) {
+    let currentNode = this.get(idx)
+    if (!currentNode) return false
+    currentNode.val = val
+    return true
   }
 
   traverse() {
