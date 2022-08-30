@@ -87,6 +87,29 @@ class SinglyLinkedList {
     return shifted.val
   }
 
+  /*
+    unshift pseudocode
+    - this function should accept a value
+    - create a new node using the value passed to the function
+    - if list is empty, set the new node to be the new head and tail property of the list
+    - otherwise, set the newly created  node's next property to be the current head property on the list
+    - set the head property on the list to be the newly created node
+    - increment list by 1
+    - return the list
+  */
+  unshift(val) {
+    let newNode = new Node(val)
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      newNode.next = this.head
+      this.head = newNode
+    }
+    this.length++
+    return this
+  }
+
   traverse() {
     let current = this.head
     while (current) {
