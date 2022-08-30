@@ -166,6 +166,32 @@ class SinglyLinkedList {
     return true
   }
 
+  /*
+    remove pseudocode
+    - if the index is less than zero or greater than length, return undefined
+    - if the index is same as length - 1, use pop method
+    - if the index is zero, use shift method
+    - otherwise, using the get method, access the node at "index - 1"
+    - set the next property of that node to be the next node of the next node
+    - decrement length
+    - return the value of the node removed
+  */
+  remove(idx) {
+    if (idx < 0 || idx >= this.length) return undefined
+    if (idx === this.length - 1) {
+      return this.pop()
+    } else if (idx === 0) {
+      return this.shift()
+    } else {
+      let prevNode = this.get(idx - 1)
+      let currentNode = this.get(idx)
+      prevNode.next = currentNode.next
+      currentNode.next = null
+      this.length--
+      return currentNode.val
+    }
+  }
+
   traverse() {
     let current = this.head
     while (current) {
