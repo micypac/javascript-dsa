@@ -74,7 +74,6 @@ class SinglyLinkedList {
     - decrement length by 1
     - return value of the node removed
   */
-
   shift() {
     if (!this.head) return undefined
 
@@ -108,6 +107,21 @@ class SinglyLinkedList {
     }
     this.length++
     return this
+  }
+
+  /*
+    get pseudocode
+    - this function should accept an index
+    - if the index is less than zero or greater than or equal to the length of the list, return null
+    - loop through the list until you reach the index and return the node at that specific index
+  */
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return null
+    let current = this.head
+    for (let i = 0; i < this.length; i++) {
+      if (i === idx) return current
+      current = current.next
+    }
   }
 
   traverse() {
