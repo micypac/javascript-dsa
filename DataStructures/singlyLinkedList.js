@@ -35,4 +35,59 @@ class SinglyLinkedList {
 
     return this
   }
+
+  /*
+    popping pseudocode
+    - if there are no nodes in the list, return undefined
+    - loop through the list until you reached the tail
+    - set the next property of the 2nd to last node to be null
+    - set the tail to be the 2nd to the last node
+    - decrement the length of the list by 1
+    - return the value of the node removed
+  */
+  pop() {
+    if (this.length === 0) return undefined
+    let current = this.head
+    let beforeCurrent = current
+
+    while (current.next) {
+      beforeCurrent = current
+      current = current.next
+    }
+
+    this.tail = beforeCurrent
+    this.tail.next = null
+
+    this.length--
+    if (this.length === 0) {
+      this.head = null
+      this.tail = null
+    }
+    return current.val
+  }
+
+  traverse() {
+    let current = this.head
+    while (current) {
+      console.log(current.val, current.next)
+      current = current.next
+    }
+  }
 }
+
+const myList = new SinglyLinkedList()
+myList.push('monica')
+myList.push('jenny')
+myList.push('jerlyn')
+myList.push('marissa')
+
+myList.traverse()
+
+let pop1 = myList.pop()
+console.log('pop', pop1)
+myList.traverse()
+myList.pop()
+myList.pop()
+myList.pop()
+
+console.log(myList)
