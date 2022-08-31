@@ -38,4 +38,33 @@ class DoublyLinkedList {
     this.length++
     return this
   }
+
+  /*
+    pop pseudocode
+    - if there is no head, return undefined
+    - store the current tail in a variable to return later
+    - if the length is 1, set head and tail to be null
+    - update the tail to be the previous node
+    - set new tail's next to be null
+    - set old tail's prev to be null, to absolutely sever the connection
+    - decrement length
+    - return popped node
+  */
+  pop() {
+    if (!this.head) return undefined
+
+    let popped = this.tail
+    if (this.length === 1) {
+      this.head = null
+      this.tail = null
+    } else {
+      this.tail = popped.prev
+      // sever all connections to the popped node.
+      this.tail.next = null
+      popped.prev = null
+    }
+
+    this.length--
+    return popped
+  }
 }
