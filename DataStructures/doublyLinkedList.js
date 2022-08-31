@@ -120,4 +120,36 @@ class DoublyLinkedList {
     this.length++
     return this
   }
+
+  /*
+    get pseudocode
+    - this function should accept an index
+    - if the index is less than zero or greater than or equal to the length of the list, return null
+    - if the index is closer to the start of the list, loop through the list beginning at head
+    - if the index is closer to the end of the list, loop through the list beginning at tail
+    - return node
+  */
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return null
+
+    let listDiff = this.length - idx - 1
+    let count = 0
+    let currentNode
+
+    if (idx <= listDiff) {
+      currentNode = this.head
+      while (count < idx) {
+        currentNode = currentNode.next
+        count++
+      }
+    } else {
+      currentNode = this.tail
+      while (count < listDiff) {
+        currentNode = currentNode.prev
+        count++
+      }
+    }
+
+    return currentNode
+  }
 }
