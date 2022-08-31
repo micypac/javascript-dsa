@@ -67,4 +67,31 @@ class DoublyLinkedList {
     this.length--
     return popped
   }
+
+  /*
+    shift pseudocode
+    - if there is no head, return undefined
+    - store the current head in a variable to return later
+    - if the length is 1, set head and tail to be null
+    - update the head to be the next node
+    - set new head's next to be null
+    - set old head's prev to be null, to absolutely sever the connection
+    - decrement length
+    - return popped node
+  */
+  shift() {
+    if (!this.head) return undefined
+
+    let shifted = this.head
+    if (this.length === 1) {
+      this.head = null
+      this.tail = null
+    } else {
+      this.head = shifted.next
+      this.head.prev = null
+      shifted.next = null
+    }
+    this.length--
+    return shifted
+  }
 }
