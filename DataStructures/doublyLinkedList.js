@@ -166,4 +166,37 @@ class DoublyLinkedList {
     currentNode.val = val
     return true
   }
+
+  /*
+    insert pseudocode
+    - if the index is less than zero or greater than length, return false
+    - if the index is same as length, push new node to the end of the list
+    - if the index is zero, unshift new node to the beginning of the list
+    - otherwise, using the get method, access the node at "index"
+    - create another variable accessing the prev property of the retrieved node above
+    - set the next property on that beforeNode to be the new node
+    - set the prev property of the retrieved node to be the new node
+    - set new node's next property to be the retrieved node
+    - set new node's prev property to be the beforeNode
+    - increment length
+    - return true
+  */
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length) return false
+    if (idx === 0) {
+      this.unshift(val)
+    } else if (idx === this.length) {
+      this.push(val)
+    } else {
+      let newNode = new Node(val)
+      let currentNode = this.get(idx)
+      let prevNode = currentNode.prev
+      newNode.prev = prevNode
+      newNode.next = currentNode
+      prevNode.next = newNode
+      currentNode.prev = newNode
+      this.length++
+    }
+    return true
+  }
 }
