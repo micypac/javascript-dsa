@@ -94,4 +94,30 @@ class DoublyLinkedList {
     this.length--
     return shifted
   }
+
+  /*
+    unshift pseudocode
+    - create a new node using the value passed to the function
+    - if list is empty, set the new node as the head and tail property of the list
+    - otherwise, set the prev property of the head to be the new node
+    - set the next property of the new node to be the head
+    - and set the head property of the list to be the new node
+    - increment list
+    - return list
+  */
+  unshift(val) {
+    let newNode = new Node(val)
+
+    if (!this.head) {
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      this.head.prev = newNode
+      newNode.next = this.head
+      this.head = newNode
+    }
+
+    this.length++
+    return this
+  }
 }
