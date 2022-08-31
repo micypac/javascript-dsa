@@ -152,4 +152,18 @@ class DoublyLinkedList {
 
     return currentNode
   }
+
+  /*
+    set pseudocode
+    - this function should accept an index and a value
+    - use get function to find specific node
+    - if node is not found, return false
+    - if found, set the value of that node to be the parameter received and return true
+  */
+  set(idx, val) {
+    let currentNode = this.get(idx)
+    if (!currentNode) return false
+    currentNode.val = val
+    return true
+  }
 }
