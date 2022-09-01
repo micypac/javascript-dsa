@@ -1,3 +1,14 @@
+/*
+  STACK
+
+  A LIFO data structure
+  Last element added to the stack will be first element removed from the stack.
+
+  Where stacks are used:
+  - managing function invocations
+  - undo/redo
+  - browser page histories(back/forward)
+*/
 class Node {
   constructor(val) {
     this.val = val
