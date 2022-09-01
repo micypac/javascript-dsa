@@ -199,4 +199,32 @@ class DoublyLinkedList {
     }
     return true
   }
+
+  /*
+    remove pseudocode
+    - if the index is less than zero or greater than or equal to length, return undefined
+    - if the index is same as length, pop the list
+    - if the index is zero, shift the list
+    - otherwise, using the get method, access the removedNode at "index"
+    - create additional variables for the previousNode and nextNode
+    - connect previousNode and nextNode with each other
+    - set null on removedNode next and prev property
+    - decrement length
+    - return removedNode
+  */
+  remove(idx) {
+    if (idx < 0 || idx >= this.length) return undefined
+    if (idx === 0) return this.shift()
+    if (idx === this.length - 1) return this.pop()
+
+    let currentNode = this.get(idx)
+    let beforeNode = currentNode.prev
+    let afterNode = currentNode.next
+    beforeNode.next = afterNode
+    afterNode.prev = beforeNode
+    currentNode.next = null
+    currentNode.prev = null
+    this.length--
+    return currentNode
+  }
 }
