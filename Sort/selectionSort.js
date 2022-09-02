@@ -1,7 +1,7 @@
 /*
   PSEUDOCODE
-  1. store the first element's index as the smallest value we've seen so far.
-  2. compare this item to the next item/s in the array until you find a smaller number.
+  1. iterate each element starting from first, store this element's index as the smallest value we've seen so far.
+  2. compare this item to the next items in the array until you find a smaller number.
   3. if a smaller number is found, designate the element's index as the new smallest number.
   4. if the "smallest number" (index) is not the value you initially began with, swap the 2 values.
 */
