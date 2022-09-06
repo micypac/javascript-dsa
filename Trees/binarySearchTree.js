@@ -124,7 +124,7 @@ class BinarySearchTree {
   }
 
   /*
-    BFS - Breadth first search pseudocode
+    BFS (Breadth first search) pseudocode
     - create a queue (can be an array) and a variable to store the values of nodes visited
     - place the root node in the queue
     - loop as long as there is anything in the queue
@@ -149,6 +149,32 @@ class BinarySearchTree {
 
     return result
   }
+
+  /*
+    DFS (Depth first search) PreOrder pseudocode
+    - create a variable to store the values of nodes visited
+    - store the root of the BST in a variable called current
+    - write a helper function which accepts a node
+      - push the value of the node to the variable that stores the values
+      - if the node has a left property, call the helper function with the left property on the node
+      - if the node has a right property, call the helper function with the right property on the node
+    - invoke the helper function with the current helper variable
+    - return the array of values
+  */
+  DFSPreOrder() {
+    const result = []
+    let current = this.root
+
+    const traverse = (node) => {
+      result.push(node.val)
+      if (node.left) traverse(node.left)
+      if (node.right) traverse(node.right)
+    }
+
+    traverse(current)
+
+    return result
+  }
 }
 
 const myBst = new BinarySearchTree()
@@ -160,3 +186,4 @@ myBst.insert(7)
 myBst.insert(11)
 myBst.insert(16)
 console.log(myBst.BFS())
+console.log(myBst.DFSPreOrder())
