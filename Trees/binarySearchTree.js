@@ -202,6 +202,32 @@ class BinarySearchTree {
 
     return result
   }
+
+  /*
+    DFS (Depth first search) InOrder pseudocode. This will traverse a node's left and if its none, will visit that node, then it will visit right.
+    - create a variable to store the values of nodes visited
+    - store the root of the BST in a variable called current
+    - write a helper function which accepts a node
+      - if the node has a left property, call the helper function with the left property on the node
+      - push the value of the node to the variable that stores the values
+      - if the node has a right property, call the helper function with the right property on the node
+    - invoke the helper function with the current helper variable
+    - return the array of values
+  */
+  DFSInOrder() {
+    const result = []
+    let current = this.root
+
+    const traverse = (node) => {
+      if (node.left) traverse(node.left)
+      result.push(node.val)
+      if (node.right) traverse(node.right)
+    }
+
+    traverse(current)
+
+    return result
+  }
 }
 
 const myBst = new BinarySearchTree()
@@ -215,3 +241,4 @@ myBst.insert(16)
 console.log(myBst.BFS())
 console.log(myBst.DFSPreOrder())
 console.log(myBst.DFSPostOrder())
+console.log(myBst.DFSInOrder())
