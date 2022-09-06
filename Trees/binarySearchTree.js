@@ -122,6 +122,33 @@ class BinarySearchTree {
     if (!found) return undefined
     return current
   }
+
+  /*
+    BFS - Breadth first search pseudocode
+    - create a queue (can be an array) and a variable to store the values of nodes visited
+    - place the root node in the queue
+    - loop as long as there is anything in the queue
+      - dequeue a node from the queue and push the value of the node into the variable that stores the node
+      - if there is a left property on the node dequeued, add it to the queue
+      - if there is a right property on the node dequeued, add it to the queue
+    - return the variable that stored the nodes visited
+  */
+  BFS() {
+    const result = []
+    const queue = []
+    let node = this.root
+
+    queue.push(node)
+
+    while (queue.length) {
+      node = queue.shift()
+      result.push(node.val)
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+    }
+
+    return result
+  }
 }
 
 const myBst = new BinarySearchTree()
@@ -132,4 +159,4 @@ myBst.insert(2)
 myBst.insert(7)
 myBst.insert(11)
 myBst.insert(16)
-console.log(myBst)
+console.log(myBst.BFS())
