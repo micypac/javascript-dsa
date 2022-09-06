@@ -51,9 +51,10 @@ class BinarySearchTree {
           - if there is, move to that node and repeat these steps
           - if theres not, add that node as the left property
 
-          10
-      5         13
-  2      7   11    16
+    e.g.:
+                  10
+              5         13
+          2      7   11    16
   */
   insert(val) {
     let newNode = new Node(val)
@@ -82,6 +83,44 @@ class BinarySearchTree {
         }
       }
     }
+  }
+
+  /*
+    Find/Search pseudocode
+    - starting at the root
+      - check if there is root, if not, we're done searching
+      - if there's root, check if the value is the value we're looking for. If found, we're done
+      - if greater
+        - check to see if there is a node to the right
+          - if there is, move to that node and repeat these steps
+          - if theres not, we're done searching
+      - if it is less
+        - check to see if there is a node to the left
+          - if there is, move to that node and repeat these steps
+          - if theres not, we're done searching
+  */
+  find(val) {
+    if (!this.root) return false
+
+    let current = this.root
+    let found = false
+
+    while (current && !found) {
+      // if (val === current.val) return current
+
+      if (val < current.val) {
+        // if (current.left === null) return false
+        current = current.left
+      } else if (val > current.val) {
+        // if (current.right === null) return false
+        current = current.right
+      } else {
+        found = true
+      }
+    }
+
+    if (!found) return undefined
+    return current
   }
 }
 
