@@ -57,9 +57,62 @@ class MaxBinaryHeap {
       }
     }
   }
+
+  /*
+    Remove pseudocode
+    - swap the first value in the values property with the last one
+    - pop from the values property, so you can return the value at the end
+    - have the new root "bubble down" to the correct spot to preserve heap rules
+      - parent index starts at 0 (the root)
+      - find the index of the left child: 2n + 1 (make sure its not out of bounds)
+      - find the index of the right child: 2n + 2 (make sure its not out of bounds)
+      - if the left or right is larger than the parent, swap. if both left and right are larger, swap with the larger child
+      - the child index you swapped to now becomes the new parent index
+      - keep looping and swapping until neither the child is larger than the parent
+      - return the removed root
+  */
+  extractMax() {
+    let temp = this.values[0]
+    this.values[0] = this.values[this.values.length - 1]
+    this.values[this.values.length - 1] = temp
+
+    let popped = this.values.pop()
+
+    // bubble down
+    let idx = 0
+    while (true) {
+      let leftIdx = 2 * idx + 1
+      let rightIdx = 2 * idx + 2
+      let value = this.values[idx]
+      let leftValue = this.values.length > leftIdx ? this.values[leftIdx] : null
+      let rightValue =
+        this.values.length > rightIdx ? this.values[rightIdx] : null
+      let largerChild = Math.max(leftValue, rightValue)
+      let largerChildIdx = this.values.indexOf(largerChild)
+
+      if (largerChild > value) {
+        this.values[idx] = largerChild
+        this.values[largerChildIdx] = value
+        idx = largerChildIdx
+      } else {
+        break
+      }
+    }
+
+    return popped
+  }
 }
 
 const heap = new MaxBinaryHeap()
 console.log(heap)
-heap.insert(55)
+// heap.insert(55)
+// console.log(heap)
+console.log(heap.extractMax())
+console.log(heap)
+console.log(heap.extractMax())
+console.log(heap.extractMax())
+console.log(heap.extractMax())
+console.log(heap.extractMax())
+console.log(heap.extractMax())
+console.log(heap.extractMax())
 console.log(heap)
