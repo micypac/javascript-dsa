@@ -14,4 +14,15 @@ class HashTable {
 
     return total
   }
+
+  set(key, value) {
+    let index = this._hash(key)
+
+    // if current index in keymap is empty, create an empty array
+    if (!this.keymap[index]) {
+      this.keymap[index] = []
+    }
+    // push the new key/value with seperate chaining
+    this.keymap[index].push([key, value])
+  }
 }
