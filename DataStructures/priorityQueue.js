@@ -84,7 +84,7 @@ class PriorityQueue {
         smallerNodeIdx = rightIdx
       }
 
-      if (smallerNode?.priority < node.priority) {
+      if (smallerNode?.priority < node?.priority) {
         this.values[idx] = smallerNode
         this.values[smallerNodeIdx] = node
         idx = smallerNodeIdx
