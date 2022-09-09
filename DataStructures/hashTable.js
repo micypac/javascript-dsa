@@ -25,4 +25,30 @@ class HashTable {
     // push the new key/value with seperate chaining
     this.keymap[index].push([key, value])
   }
+
+  get(key) {
+    let index = this._hash(key)
+    if (this.keymap[index]) {
+      for (let i = 0; i < this.keymap[index].length; i++) {
+        if (this.keymap[index][i][0] === key) {
+          return this.keymap[index][i][1]
+        }
+      }
+    }
+
+    return undefined
+  }
 }
+
+const ht = new HashTable(17)
+ht.set('maroon', '#800000')
+ht.set('yellow', '#FFFF00')
+ht.set('olive', '#808000')
+ht.set('salmon', '#FA8072')
+ht.set('lightcoral', '#F08080')
+ht.set('mediumvioletred', '#C71585')
+ht.set('plum', '#DDA0DD')
+
+console.log(ht)
+console.log(ht.get('yellow'))
+console.log(ht.get('maroon'))
