@@ -38,6 +38,22 @@ class HashTable {
 
     return undefined
   }
+
+  values() {
+    let valuesArr = []
+
+    for (let i = 0; i < this.keymap.length; i++) {
+      if (this.keymap[i]) {
+        for (let j = 0; j < this.keymap[i].length; j++) {
+          if (!valuesArr.includes(this.keymap[i][j][1])) {
+            valuesArr.push(this.keymap[i][j][1])
+          }
+        }
+      }
+    }
+
+    return valuesArr
+  }
 }
 
 const ht = new HashTable(17)
@@ -48,7 +64,9 @@ ht.set('salmon', '#FA8072')
 ht.set('lightcoral', '#F08080')
 ht.set('mediumvioletred', '#C71585')
 ht.set('plum', '#DDA0DD')
+ht.set('mauve', '#DDA0DD')
 
 console.log(ht)
 console.log(ht.get('yellow'))
 console.log(ht.get('maroon'))
+console.log(ht.values())
