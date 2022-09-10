@@ -1,8 +1,24 @@
+/*
+  Hash Tables
+  - hash tables are collections of key-value pairs
+  - it can find values quickly given a key
+  - it can add new key-values quickly
+  - hash tables store data in a large array, and work by hashing the keys
+  - a good hash should be fast, distribute keys uniformly, and be deterministic
+  - seperate chaining and linear probing are two strategies used to deal with 2 or more keys that hash the same index
+    - with seperate chaining, at each index in our array we store values using a more sophisticated data structure (can be nested array or linked list)
+    - with linear probing, we search through the array to find the next empty slot. This allows us to store a single key-value at each index.
+*/
 class HashTable {
   constructor(size = 53) {
     this.keymap = new Array(size)
   }
 
+  /*
+    the prime number in the hash is helpful in spreading out the keys more uniformly
+    its also helpful if the array that you're putting values into has a prime length
+    (see Google!)
+  */
   _hash(key) {
     let total = 0
     const WEIRD_PRIME = 31
