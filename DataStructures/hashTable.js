@@ -54,6 +54,20 @@ class HashTable {
 
     return valuesArr
   }
+
+  keys() {
+    let keysArr = []
+
+    for (let i = 0; i < this.keymap.length; i++) {
+      if (this.keymap[i]) {
+        for (let j = 0; j < this.keymap[i].length; j++) {
+          keysArr.push(this.keymap[i][j][0])
+        }
+      }
+    }
+
+    return keysArr
+  }
 }
 
 const ht = new HashTable(17)
@@ -69,4 +83,5 @@ ht.set('mauve', '#DDA0DD')
 console.log(ht)
 console.log(ht.get('yellow'))
 console.log(ht.get('maroon'))
+console.log(ht.keys())
 console.log(ht.values())
