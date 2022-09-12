@@ -84,7 +84,7 @@ class Graph {
   }
 
   /*
-    DFSI (terative)
+    DFSI (iterative)
     - the function should receive the starting node/vertex
     - create a stack to help use keep track of nodes/vertices (use list/array)
     - create a list to store the end result
@@ -133,6 +133,40 @@ class Graph {
         if (!visited[item]) {
           visited[item] = true
           stack.push(item)
+        }
+      })
+    }
+
+    return result
+  }
+
+  /*
+    BFS (iterative)
+    - the function should accept a node/vertex
+    - create a queue and place the starting node in it
+    - create a list to store end result
+    - create an object for nodes visited
+    - mark the starting node as visited
+    - loop as long as there is anything in the queue
+    - shift from queue and push it to result list
+    - loop each vertex in the adjacency list for the vertex you are visiting
+    - if neighbor is not visited, mark it as visited and enqueue    
+  */
+  BFS(start) {
+    const queue = [start]
+    const result = []
+    const visited = {}
+    let node
+
+    visited[start] = true
+    while (queue.length) {
+      node = queue.shift()
+      result.push(node)
+
+      this.adjacencyList[node].forEach((item) => {
+        if (!visited[item]) {
+          visited[item] = true
+          queue.push(item)
         }
       })
     }
@@ -189,3 +223,4 @@ console.log(flightGraph)
 // console.log(flightGraph.DFSR('A'))
 console.log(flightGraph.DFSI('A'))
 console.log(flightGraph.DFSIterative('A'))
+console.log(flightGraph.BFS('A'))
