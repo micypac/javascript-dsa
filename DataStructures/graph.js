@@ -82,6 +82,40 @@ class Graph {
     helper(start)
     return result
   }
+
+  /*
+    DFSI (terative)
+    - the function should receive the starting node/vertex
+    - create a stack to help use keep track of nodes/vertices (use list/array)
+    - create a list to store the end result
+    - create an object to store visited nodes/vertices
+    - add the starting node to the stack
+    - while the stack has something in it
+      - pop the next node from the stack
+      - if that node hasn't been visited yet
+        - mark it as visited
+        - add it to the result list
+        - push all of its neighbors to the stack
+    - return result
+  */
+  DFSI(start) {
+    const stack = []
+    const result = []
+    const visited = {}
+
+    stack.push(start)
+    // visited[start] = true
+    while (stack.length) {
+      let popped = stack.pop()
+      if (!visited[popped]) {
+        visited[popped] = true
+        result.push(popped)
+        this.adjacencyList[popped].forEach((item) => stack.push(item))
+      }
+    }
+
+    return result
+  }
 }
 
 const flightGraph = new Graph()
@@ -120,5 +154,14 @@ flightGraph.addEdge('D', 'E')
 flightGraph.addEdge('D', 'F')
 flightGraph.addEdge('E', 'F')
 
+//        A
+//      /   \
+//     B     C
+//     |     |
+//     D --- E
+//      \   /
+//        F
+
 console.log(flightGraph)
-console.log(flightGraph.DFSR('M'))
+console.log(flightGraph.DFSR('A'))
+console.log(flightGraph.DFSI('A'))
