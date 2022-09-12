@@ -104,7 +104,7 @@ class Graph {
     const visited = {}
 
     stack.push(start)
-    // visited[start] = true
+
     while (stack.length) {
       let popped = stack.pop()
       if (!visited[popped]) {
@@ -112,6 +112,29 @@ class Graph {
         result.push(popped)
         this.adjacencyList[popped].forEach((item) => stack.push(item))
       }
+    }
+
+    return result
+  }
+
+  //*** course solution; has fewer loops in stack since nodes already visited is not added to the stack */
+  DFSIterative(start) {
+    const stack = [start]
+    const result = []
+    const visited = {}
+    let current
+
+    visited[start] = true
+    while (stack.length) {
+      current = stack.pop()
+      result.push(current)
+
+      this.adjacencyList[current].forEach((item) => {
+        if (!visited[item]) {
+          visited[item] = true
+          stack.push(item)
+        }
+      })
     }
 
     return result
@@ -163,5 +186,6 @@ flightGraph.addEdge('E', 'F')
 //        F
 
 console.log(flightGraph)
-console.log(flightGraph.DFSR('A'))
+// console.log(flightGraph.DFSR('A'))
 console.log(flightGraph.DFSI('A'))
+console.log(flightGraph.DFSIterative('A'))
