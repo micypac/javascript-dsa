@@ -17,6 +17,7 @@
   Space - O(1)
 */
 
+//*** naive solution. Also space is O(n) */
 const minSubarrayLen = (arr, num) => {
   const totSum = arr.reduce((tot, val) => (tot += val), 0)
   if (num > totSum) return 0
@@ -31,24 +32,35 @@ const minSubarrayLen = (arr, num) => {
     sum += arr[i]
     tempArr.push(arr[i])
 
-    if (sum >= num) {
+    while (sum >= num) {
       tempMin = tempArr.length
-
-      while (true) {
-        sum -= tempArr.shift()
-
-        if (sum >= num) {
-          tempMin = tempArr.length
-        } else {
-          break
-        }
-      }
+      min = Math.min(min, tempMin)
+      sum -= tempArr.shift()
     }
-
-    min = Math.min(tempMin, min)
   }
 
   return min
 }
 
+//*** Grokking solution */
+const minSubarrayLen2 = (arr, num) => {
+  let min = Infinity
+  let sum = 0
+  let windowStart = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i]
+
+    while (sum >= num) {
+      min = Math.min(min, i - windowStart + 1)
+      sum -= arr[windowStart]
+      windowStart++
+    }
+  }
+
+  if (min === Infinity) return 0
+  return min
+}
+
 console.log(minSubarrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 95))
+console.log(minSubarrayLen2([1, 4, 16, 22, 5, 7, 8, 9, 10], 95))
