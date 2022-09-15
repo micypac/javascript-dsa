@@ -26,4 +26,22 @@ const findAverageOfSubarrays = (arr, K) => {
   return result
 }
 
-console.log(findAverageOfSubarrays([1, 3, 2, 6, -1, 4, 1, 8, 2], 5))
+//*** improve solution with time complexity of O(n) */
+const findAverageOfSubarrays2 = (arr, K) => {
+  const result = []
+  let sum = 0
+
+  for (let i = 0; i < K; i++) {
+    console.log(sum)
+    sum += arr[i]
+  }
+  result.push(sum / K)
+
+  for (let i = K; i < arr.length; i++) {
+    sum = arr[i] + sum - arr[i - K]
+    result.push(sum / K)
+  }
+  return result
+}
+
+console.log(findAverageOfSubarrays2([1, 3, 2, 6, -1, 4, 1, 8, 2], 5))
