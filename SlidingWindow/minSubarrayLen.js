@@ -17,7 +17,7 @@
   Space - O(1)
 */
 
-//*** naive solution. Also space is O(n) */
+//*** naive solution. Also violated restriction of space complexity, below is O(n) */
 const minSubarrayLen = (arr, num) => {
   const totSum = arr.reduce((tot, val) => (tot += val), 0)
   if (num > totSum) return 0
