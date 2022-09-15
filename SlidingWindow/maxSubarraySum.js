@@ -10,7 +10,7 @@
   maxSubarraySum([], 4) -> null
 */
 
-//*** Naive solution O(n^2)
+//*** Naive solution O(n*num)
 // const maxSubarraySum = (arr, num) => {
 //   if (num > arr.length) return null
 
@@ -38,7 +38,7 @@
 // }
 
 //*** Efficient/refactored solution O(n)
-const maxSubarraySum = (arr, num) => {
+const maxSubarraySum2 = (arr, num) => {
   let max = 0
   let temp = 0
 
@@ -61,7 +61,27 @@ const maxSubarraySum = (arr, num) => {
   return max
 }
 
-console.log(maxSubarraySum([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
+//*** Grokking solution */
+const maxSubarraySum3 = (arr, k) => {
+  let max = 0
+  let sum = 0
+  let windowStart = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i]
+
+    if (i >= k - 1) {
+      max = Math.max(max, sum)
+      sum -= arr[windowStart]
+      windowStart++
+    }
+  }
+
+  return max
+}
+
+console.log(maxSubarraySum2([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
+console.log(maxSubarraySum3([2, 6, 9, 2, 1, 8, 5, 6, 3], 3))
 
 //*** Exer#8 solution.
 // const maxSubarraySum = (arr, num) => {
