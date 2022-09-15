@@ -32,7 +32,6 @@ const findAverageOfSubarrays2 = (arr, K) => {
   let sum = 0
 
   for (let i = 0; i < K; i++) {
-    console.log(sum)
     sum += arr[i]
   }
   result.push(sum / K)
@@ -44,4 +43,25 @@ const findAverageOfSubarrays2 = (arr, K) => {
   return result
 }
 
+//*** Grokking solution */
+const findAverageOfSubarrays3 = (arr, K) => {
+  const result = []
+  let sum = 0
+  let windowStart = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    sum += arr[i]
+
+    if (i >= K - 1) {
+      result.push(sum / K)
+      sum -= arr[windowStart]
+      windowStart++
+    }
+  }
+
+  return result
+}
+
+console.log(findAverageOfSubarrays([1, 3, 2, 6, -1, 4, 1, 8, 2], 5))
 console.log(findAverageOfSubarrays2([1, 3, 2, 6, -1, 4, 1, 8, 2], 5))
+console.log(findAverageOfSubarrays3([1, 3, 2, 6, -1, 4, 1, 8, 2], 5))
