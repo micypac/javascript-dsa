@@ -3,11 +3,16 @@
 
   A LIFO data structure
   Last element added to the stack will be first element removed from the stack.
+  Push and pop methods is basically shift and unshift since we need time complexity O(1).
+  If we pop at end instead of beginning, its going to be O(n) since assigning the new tail will take linear time (we have no 
+  reference to node before tail o we have to traverse from the head)
 
   Where stacks are used:
   - managing function invocations
-  - undo/redo
+  - undo/redo in text editores and word processors
   - browser page histories(back/forward)
+  - compiler syntax checker for matching brackets and braces
+  - can be used to do DFS for Trees and Graph
 */
 class Node {
   constructor(val) {
