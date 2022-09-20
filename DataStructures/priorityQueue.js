@@ -1,3 +1,9 @@
+/*
+  Priority Queue
+  A priority queue is an abstract data type that operates similar to a normal queue except that each element has a certain priority.
+  The priority of the elements in the queue determines the order in which elements are removed.
+*/
+
 class Node {
   constructor(value, priority) {
     this.value = value
@@ -13,7 +19,7 @@ class PriorityQueue {
   }
 
   /*
-    Enqueue pseudocode
+    Add/Enqueue pseudocode
     - push the value into the values property on the heap
     - bubble up
       - create a variable called index which is the length of the values property - 1
@@ -22,7 +28,7 @@ class PriorityQueue {
         - swap the values from parentIdx and child index
         - set the index to be the parentIdx, and start over
   */
-  enqueue(value, priority) {
+  add(value, priority) {
     let newNode = new Node(value, priority)
     this.values.push(newNode)
 
@@ -44,7 +50,7 @@ class PriorityQueue {
   }
 
   /*
-    dequeue pseudocode
+    Poll/Dequeue pseudocode
     - swap the first value in the values property with the last one
     - pop from the values property, so you can return the value at the end
     - have the new root "bubble down" to the correct spot to preserve heap rules
@@ -56,7 +62,7 @@ class PriorityQueue {
       - keep looping and swapping until neither the child is larger than the parent
       - return the removed root
   */
-  dequeue() {
+  poll() {
     let temp = this.values[0]
     this.values[0] = this.values[this.values.length - 1]
     this.values[this.values.length - 1] = temp
@@ -98,11 +104,11 @@ class PriorityQueue {
 }
 
 const ER = new PriorityQueue()
-ER.enqueue('common cold', 5)
-ER.enqueue('gunshot wound', 1)
-ER.enqueue('high fever', 4)
-ER.enqueue('inflamed apendix', 2)
-ER.enqueue('skin laceration', 3)
+ER.add('common cold', 5)
+ER.add('gunshot wound', 1)
+ER.add('high fever', 4)
+ER.add('inflamed apendix', 2)
+ER.add('skin laceration', 3)
 console.log(ER)
-console.log(ER.dequeue())
+console.log(ER.poll())
 console.log(ER)

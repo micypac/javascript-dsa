@@ -8,6 +8,7 @@
   - print queue
   - downloading files
   - job execution in a single-threaded computers
+  - can be used to do BFS for Trees and Graph
 */
 
 class Node {

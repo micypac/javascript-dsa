@@ -1,6 +1,7 @@
 /*
   Heaps
-  Heaps are Trees. They are very similar to binary search tree, that each parent node can have at most 2 child nodes.
+  Heap is a Tree-based data structure that satisfies the heap invariant. 
+  They are very similar to binary search tree, that each parent node can have at most 2 child nodes.
   But unlike BST, there is no order such as smaller values should be to the left or higher values should be to the right.
 
   In a MaxBinaryHeap, parent nodes are always larger than children nodes.
