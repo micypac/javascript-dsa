@@ -71,6 +71,33 @@ const breadthFirstSearchI = (root) => {
   return result
 }
 
+// Find if specific value exist somewhere in the tree. Using BFS.
+const treeIncludesI = (root, target) => {
+  if (root === null) return false
+
+  const queue = [root]
+  while (queue.length > 0) {
+    const current = queue.shift()
+    if (current.val === target) return true
+
+    if (current.left) queue.push(current.left)
+    if (current.right) queue.push(current.right)
+  }
+
+  return false
+}
+
+// Find if specific value exist somewhere in the tree. Using recursive.
+const treeIncludesR = (root, target) => {
+  if (root === null) return false
+  if (root.val === target) return true
+
+  return treeIncludesR(root.left, target) || treeIncludesR(root.right, target)
+}
+
 console.log(depthFirstSearchI(a))
 console.log(depthFirstSearchR(a))
 console.log(breadthFirstSearchI(a))
+console.log(treeIncludesI(a, 'e'))
+console.log(treeIncludesI(a, 'm'))
+console.log(treeIncludesR(a, 'e'))
