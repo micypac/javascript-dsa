@@ -6,7 +6,11 @@ class Node {
   }
 }
 
-// Depth first search iterative.
+/*****************************************************
+ * DEPTH FIRST SEARCH
+ *****************************************************/
+
+// Iterative.
 const depthFirstSearchI = (root) => {
   if (root === null) return []
 
@@ -24,7 +28,7 @@ const depthFirstSearchI = (root) => {
   return result
 }
 
-// Depth first search recursive.
+// Recursive.
 const depthFirstSearchR = (root) => {
   if (root === null) return []
   const left = depthFirstSearchR(root.left)
@@ -32,7 +36,10 @@ const depthFirstSearchR = (root) => {
   return [root.val, ...left, ...right]
 }
 
-// Breadth first search.
+/*****************************************************
+ * BREADTH FIRST SEARCH
+ *****************************************************/
+
 const breadthFirstSearchI = (root) => {
   if (root === null) return []
 
@@ -50,7 +57,12 @@ const breadthFirstSearchI = (root) => {
   return result
 }
 
-// Find if specific value exist somewhere in the tree. Using BFS.
+/*****************************************************
+ * TREE INCLUDES
+ * Find if specific value exist somewhere in the tree.
+ *****************************************************/
+
+// Using BFS.
 const treeIncludesI = (root, target) => {
   if (root === null) return false
 
@@ -66,7 +78,7 @@ const treeIncludesI = (root, target) => {
   return false
 }
 
-// Find if specific value exist somewhere in the tree. Using recursive.
+// Using recursive.
 const treeIncludesR = (root, target) => {
   if (root === null) return false
   if (root.val === target) return true
@@ -74,13 +86,18 @@ const treeIncludesR = (root, target) => {
   return treeIncludesR(root.left, target) || treeIncludesR(root.right, target)
 }
 
-// Tree sum. Return the sum of values for the entire tree. Using recursive.
+/*****************************************************
+ * TREE SUM
+ * Return the sum of all nodes from the tree.
+ *****************************************************/
+
+// Using recursive.
 const treeSumR = (root) => {
   if (root === null) return 0
   return root.val + treeSumR(root.left) + treeSumR(root.right)
 }
 
-// Tree sum. Return the sum of values for the entire tree. Using iterative.
+// Using iterative.
 const treeSumI = (root) => {
   if (root === null) return 0
   let sum = 0
@@ -94,6 +111,34 @@ const treeSumI = (root) => {
   }
 
   return sum
+}
+
+/*****************************************************
+ * TREE MINIMUM VALUE
+ * Return the least value from the entire tree.
+ *****************************************************/
+
+// Iterative using DFS or BFS
+const treeMinValueI = (root) => {
+  if (root === null) return undefined
+
+  const stack = [root]
+  let min = Infinity
+  while (stack.length > 0) {
+    const current = stack.pop() // change to shift() method if using BFS
+    min = Math.min(min, current.val)
+
+    if (current.left) stack.push(current.left)
+    if (current.right) stack.push(current.right)
+  }
+
+  return min
+}
+
+// Recursive
+const treeMinValueR = (root) => {
+  if (root === null) return Infinity
+  return Math.min(root.val, treeMinValueR(root.left), treeMinValueR(root.right))
 }
 
 const a = new Node('a')
@@ -138,3 +183,5 @@ console.log(treeIncludesI(a, 'm'))
 console.log(treeIncludesR(a, 'e'))
 console.log(treeSumR(a1))
 console.log(treeSumI(a1))
+console.log(treeMinValueI(a1))
+console.log(treeMinValueR(a1))
