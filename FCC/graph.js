@@ -264,3 +264,41 @@ const exploreSize = (graph, current, visited) => {
 }
 
 console.log(largestComponent(graph4))
+
+/*****************************************************
+ * SHORTEST PATH
+ * Define a function that takes in an array of edges for an undirected graph and 2 nodes A & B.
+ * The function should return the length of the shortest path between A & B. If theres is o path, return -1.
+ *****************************************************/
+
+const edges1 = [
+  ['w', 'x'],
+  ['x', 'y'],
+  ['z', 'y'],
+  ['z', 'v'],
+  ['w', 'v'],
+]
+
+const shortestPath = (edges, nodeA, nodeB) => {
+  const graph = buildAdjacencyListGraph(edges)
+  const visited = new Set([nodeA])
+  const queue = [[nodeA, 0]]
+
+  while (queue.length > 0) {
+    const [current, distance] = queue.shift()
+
+    if (current === nodeB) return distance
+
+    for (let neighbor of graph[current]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor)
+        queue.push([neighbor, distance + 1])
+      }
+    }
+  }
+
+  return -1
+}
+
+console.log(shortestPath(edges1, 'w', 'z')) // 2
+console.log(shortestPath(edges1, 'w', 'a')) // -1
