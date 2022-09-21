@@ -141,6 +141,19 @@ const treeMinValueR = (root) => {
   return Math.min(root.val, treeMinValueR(root.left), treeMinValueR(root.right))
 }
 
+/*****************************************************
+ * MAX ROOT TO LEAF PATH SUM
+ * Return the max sum from root to leaf.
+ *****************************************************/
+
+const maxPathSum = (root) => {
+  if (root === null) return -Infinity
+  if (root.left === null && root.right === null) return root.val
+
+  const maxChild = Math.max(maxPathSum(root.left), maxPathSum(root.right))
+  return root.val + maxChild
+}
+
 const a = new Node('a')
 const b = new Node('b')
 const c = new Node('c')
@@ -175,6 +188,14 @@ b1.left = d1
 b1.right = e1
 c1.right = f1
 
+/*
+        5
+      /   \
+     10    6
+    / \.    \
+   4   12    1
+*/
+
 console.log(depthFirstSearchI(a))
 console.log(depthFirstSearchR(a))
 console.log(breadthFirstSearchI(a))
@@ -185,3 +206,4 @@ console.log(treeSumR(a1))
 console.log(treeSumI(a1))
 console.log(treeMinValueI(a1))
 console.log(treeMinValueR(a1))
+console.log(maxPathSum(a1))
