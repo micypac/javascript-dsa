@@ -231,3 +231,36 @@ const graph4 = {
 */
 
 console.log(connectedComponents(graph4)) // 2
+
+/*****************************************************
+ * LARGEST COMPONENT COUNT
+ * Define a function that takes in the adjacency list of an undirected graph.
+ * The function should return the number of components within the graph.
+ *****************************************************/
+
+const largestComponent = (graph) => {
+  let max = 0
+  const visited = new Set()
+
+  for (let node in graph) {
+    const size = exploreSize(graph, node, visited)
+    max = Math.max(max, size)
+  }
+
+  return max
+}
+
+const exploreSize = (graph, current, visited) => {
+  if (visited.has(String(current))) return 0
+
+  visited.add(String(current))
+  let size = 1
+
+  for (let neighbor of graph[current]) {
+    size += exploreSize(graph, neighbor, visited)
+  }
+
+  return size
+}
+
+console.log(largestComponent(graph4))
