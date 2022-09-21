@@ -182,7 +182,7 @@ console.log(undirectedPath(graph3, 'i', 'm'))
 console.log(undirectedPath(graph3, 'i', 'n'))
 
 /*****************************************************
- * CONNECTED COMPONENTS
+ * CONNECTED COMPONENTS COUNT
  * Define a function that takes in the adjacency list of an undirected graph.
  * The function should return the number of components within the graph.
  *****************************************************/
