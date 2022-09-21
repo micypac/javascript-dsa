@@ -113,3 +113,70 @@ const hasPathI = (graph, src, dst) => {
 
 console.log(hasPathR(graph2, 'f', 'j'))
 console.log(hasPathI(graph2, 'f', 'k'))
+
+/*****************************************************
+ * UNDIRECTED PATH
+ * Define a function that takes an array of edges for an undirected graph and two nodes A & B.
+ * The function should return a boolean indicating whether or not there exists a path between nodes A & B.
+ *****************************************************/
+
+/* Undirected unweighted graph. Usually represented by an array of edges.
+      i ---- j   
+      |   
+      |   
+      k ---- l
+      |
+      m
+      
+      o ---- n
+*/
+const graph3 = [
+  ['i', 'j'],
+  ['k', 'i'],
+  ['m', 'k'],
+  ['k', 'l'],
+  ['o', 'n'],
+]
+
+// helper function to convert array of edges into adjacency list.
+const buildAdjacencyListGraph = (edges) => {
+  const graph = {}
+
+  for (let edge of edges) {
+    const [a, b] = edge
+
+    if (!(a in graph)) graph[a] = []
+    if (!(b in graph)) graph[b] = []
+
+    graph[a].push(b)
+    graph[b].push(a)
+  }
+
+  return graph
+}
+
+// graph3 converted into adjacency list
+const graph3AL = buildAdjacencyListGraph(graph3)
+console.log(graph3AL)
+
+const undirectedPath = (edges, nodeA, nodeB) => {
+  const graph = buildAdjacencyListGraph(edges)
+  return hasUndirectedPath(graph, nodeA, nodeB, new Set())
+}
+
+// Recursive
+const hasUndirectedPath = (graph, src, dst, visited) => {
+  if (src === dst) return true
+  if (visited.has(src)) return false
+
+  visited.add(src)
+
+  for (let neighbor of graph[src]) {
+    if (hasUndirectedPath(graph, neighbor, dst, visited) === true) return true
+  }
+
+  return false
+}
+
+console.log(undirectedPath(graph3, 'i', 'm'))
+console.log(undirectedPath(graph3, 'i', 'n'))
