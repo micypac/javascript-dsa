@@ -60,23 +60,6 @@ const breadthFirstPrint = (graph, source) => {
 // depthFirstPrintR(graph, 'a')
 // breadthFirstPrint(graph, 'a')
 
-const graph2 = {
-  f: ['g', 'i'],
-  g: ['h'],
-  h: [],
-  i: ['g', 'k'],
-  j: ['i'],
-  k: [],
-}
-
-/* Directed unweighted graph
-      f  → g  → h    
-      ↓  ↗   
-      i  ← j
-      ↓
-      k  
-*/
-
 /*****************************************************
  * HAS PATH
  * Define a function that takes an object representing the adjacency list of a directed acyclic graph and two nodes (src, and dst).
@@ -111,32 +94,31 @@ const hasPathI = (graph, src, dst) => {
   return false
 }
 
-console.log(hasPathR(graph2, 'f', 'j'))
-console.log(hasPathI(graph2, 'f', 'k'))
+const graph2 = {
+  f: ['g', 'i'],
+  g: ['h'],
+  h: [],
+  i: ['g', 'k'],
+  j: ['i'],
+  k: [],
+}
+
+/* Directed unweighted graph
+      f  → g  → h    
+      ↓  ↗   
+      i  ← j
+      ↓
+      k  
+*/
+
+console.log('Has path from f -> j? ', hasPathR(graph2, 'f', 'j'))
+console.log('Has path from f -> k? ', hasPathI(graph2, 'f', 'k'))
 
 /*****************************************************
  * UNDIRECTED PATH
  * Define a function that takes an array of edges for an undirected graph and two nodes A & B.
  * The function should return a boolean indicating whether or not there exists a path between nodes A & B.
  *****************************************************/
-
-/* Undirected unweighted graph. Usually represented by an array of edges.
-      i ---- j   
-      |   
-      |   
-      k ---- l
-      |
-      m
-      
-      o ---- n
-*/
-const graph3 = [
-  ['i', 'j'],
-  ['k', 'i'],
-  ['m', 'k'],
-  ['k', 'l'],
-  ['o', 'n'],
-]
 
 // helper function to convert array of edges into adjacency list.
 const buildAdjacencyListGraph = (edges) => {
@@ -154,10 +136,6 @@ const buildAdjacencyListGraph = (edges) => {
 
   return graph
 }
-
-// graph3 converted into adjacency list
-const graph3AL = buildAdjacencyListGraph(graph3)
-console.log(graph3AL)
 
 const undirectedPath = (edges, nodeA, nodeB) => {
   const graph = buildAdjacencyListGraph(edges)
@@ -178,8 +156,30 @@ const hasUndirectedPath = (graph, src, dst, visited) => {
   return false
 }
 
-console.log(undirectedPath(graph3, 'i', 'm'))
-console.log(undirectedPath(graph3, 'i', 'n'))
+/* Undirected unweighted graph. Usually represented by an array of edges.
+      i ---- j   
+      |   
+      |   
+      k ---- l
+      |
+      m
+      
+      o ---- n
+*/
+const graph3 = [
+  ['i', 'j'],
+  ['k', 'i'],
+  ['m', 'k'],
+  ['k', 'l'],
+  ['o', 'n'],
+]
+
+// graph3 converted into adjacency list
+// const graph3AL = buildAdjacencyListGraph(graph3)
+// console.log(graph3AL)
+
+console.log('Has path from i -> m? ', undirectedPath(graph3, 'i', 'm'))
+console.log('Has path from i -> n? ', undirectedPath(graph3, 'i', 'n'))
 
 /*****************************************************
  * CONNECTED COMPONENTS COUNT
@@ -230,7 +230,10 @@ const graph4 = {
           3
 */
 
-console.log(connectedComponents(graph4)) // 2
+console.log(
+  'Number of connected components/islands: ',
+  connectedComponents(graph4),
+) // 2
 
 /*****************************************************
  * LARGEST COMPONENT COUNT
@@ -263,7 +266,7 @@ const exploreSize = (graph, current, visited) => {
   return size
 }
 
-console.log(largestComponent(graph4))
+console.log('Largest number of components: ', largestComponent(graph4))
 
 /*****************************************************
  * SHORTEST PATH
@@ -300,5 +303,56 @@ const shortestPath = (edges, nodeA, nodeB) => {
   return -1
 }
 
-console.log(shortestPath(edges1, 'w', 'z')) // 2
-console.log(shortestPath(edges1, 'w', 'a')) // -1
+console.log(`Shortest path from w to z: `, shortestPath(edges1, 'w', 'z')) // 2
+console.log(`Shortest path from w to a: `, shortestPath(edges1, 'w', 'a')) // -1
+
+/*****************************************************
+ * ISLAND COUNT
+ * Define a function that takes in a grid containing Ws and Ls. W represents water and L represents land. The function should
+ * return the number of islands on the grid. An island is a vertically and horizontally connected region of land.
+ *****************************************************/
+
+const islandGrid1 = [
+  ['w', 'l', 'w', 'w', 'w'],
+  ['w', 'l', 'w', 'w', 'w'],
+  ['w', 'w', 'w', 'l', 'w'],
+  ['w', 'w', 'l', 'l', 'w'],
+  ['l', 'w', 'w', 'l', 'l'],
+  ['l', 'l', 'w', 'w', 'w'],
+]
+
+const islandCount = (grid) => {
+  const visited = new Set()
+  let count = 0
+
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      if (exploreIsland(grid, r, c, visited) === true) count++
+    }
+  }
+
+  return count
+}
+
+const exploreIsland = (grid, r, c, visited) => {
+  const rowInbounds = 0 <= r && r < grid.length
+  const colInbounds = 0 <= c && c < grid[0].length
+
+  if (!rowInbounds || !colInbounds) return false
+
+  if (grid[r][c] === 'w') return false
+
+  const pos = r + ',' + c
+  if (visited.has(pos)) return false
+
+  visited.add(pos)
+
+  exploreIsland(grid, r - 1, c, visited)
+  exploreIsland(grid, r + 1, c, visited)
+  exploreIsland(grid, r, c - 1, visited)
+  exploreIsland(grid, r, c + 1, visited)
+
+  return true
+}
+
+console.log('Grid island count: ', islandCount(islandGrid1))
