@@ -310,6 +310,7 @@ console.log(`Shortest path from w to a: `, shortestPath(edges1, 'w', 'a')) // -1
  * ISLAND COUNT
  * Define a function that takes in a grid containing Ws and Ls. W represents water and L represents land. The function should
  * return the number of islands on the grid. An island is a vertically and horizontally connected region of land.
+ * Time complexity O(rc) = row x col
  *****************************************************/
 
 const islandGrid1 = [
@@ -356,3 +357,49 @@ const exploreIsland = (grid, r, c, visited) => {
 }
 
 console.log('Grid island count: ', islandCount(islandGrid1))
+
+/*****************************************************
+ * MINIMUM ISLAND COUNT
+ * Define a function that takes in a grid containing Ws and Ls. W represents water and L represents land. The function should
+ * return the size of the smallest island on the grid. An island is a vertically and horizontally connected region of land.
+ * You may assume the grid contains at least one island.
+ * Time complexity O(rc) = row x col
+ *****************************************************/
+
+const minIslandCount = (grid) => {
+  const visited = new Set()
+  let min = Infinity
+
+  for (let r = 0; r < grid.length; r++) {
+    for (let c = 0; c < grid[0].length; c++) {
+      const size = exploreIsland2(grid, r, c, visited)
+      if (size !== 0) min = Math.min(min, size)
+    }
+  }
+
+  return min
+}
+
+const exploreIsland2 = (grid, r, c, visited) => {
+  const rowInbounds = 0 <= r && r < grid.length
+  const colInbounds = 0 <= c && c < grid[0].length
+
+  if (!rowInbounds || !colInbounds) return 0
+
+  if (grid[r][c] === 'w') return 0
+
+  const pos = r + ',' + c
+  if (visited.has(pos)) return 0
+  visited.add(pos)
+
+  let size = 1
+
+  size += exploreIsland2(grid, r - 1, c, visited)
+  size += exploreIsland2(grid, r + 1, c, visited)
+  size += exploreIsland2(grid, r, c - 1, visited)
+  size += exploreIsland2(grid, r, c + 1, visited)
+
+  return size
+}
+
+console.log('Minimum number of island count: ', minIslandCount(islandGrid1))
