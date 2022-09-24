@@ -8,7 +8,7 @@
   You may use an element of the array as many times as needed.
   You may assume that all input numbers are nonnegative.
 
-  canSum(7, [5,3,4,7]) => true
+  howSum(7, [5,3,4,7]) => [3,4]
 */
 
 /*****************************************************
