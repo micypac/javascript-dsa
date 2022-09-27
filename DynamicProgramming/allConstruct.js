@@ -22,9 +22,9 @@ const allConstruct = (target, wordBank) => {
     if (target.startsWith(word)) {
       const suffix = target.slice(word.length)
       const suffixWays = allConstruct(suffix, wordBank)
-      console.log('suffixWays', suffixWays)
+      // console.log('suffixWays', suffixWays)
       const targetWays = suffixWays.map((way) => [word, ...way])
-      console.log('targetWays', targetWays)
+      // console.log('targetWays', targetWays)
       result.push(...targetWays)
     }
   }
@@ -32,4 +32,48 @@ const allConstruct = (target, wordBank) => {
   return result
 }
 
-console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl'])) // 2
+console.log(allConstruct('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
+
+/*****************************************************
+ * Memoized version
+ * Time O(n^m); Space O(m)
+ *****************************************************/
+
+const allConstruct2 = (target, wordBank, memo = {}) => {
+  if (target in memo) return memo[target]
+  if (target.length === 0) return [[]]
+
+  const result = []
+
+  for (let word of wordBank) {
+    if (target.startsWith(word)) {
+      const suffix = target.slice(word.length)
+      const suffixWays = allConstruct2(suffix, wordBank, memo)
+
+      const targetWays = suffixWays.map((way) => [word, ...way])
+
+      result.push(...targetWays)
+    }
+  }
+
+  memo[target] = result
+  return result
+}
+
+console.log(allConstruct2('purple', ['purp', 'p', 'ur', 'le', 'purpl']))
+console.log(
+  allConstruct2('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']),
+)
+console.log(
+  allConstruct2('skateboard', ['bo', 'rd', 'ate', 't', 'ska', 'sk', 'boar']),
+)
+console.log(
+  allConstruct2('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+    'e',
+    'ee',
+    'eee',
+    'eeee',
+    'eeeee',
+    'eeeeee',
+  ]),
+)
