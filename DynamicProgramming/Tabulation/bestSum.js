@@ -12,7 +12,8 @@ const bestSum = (targetSum, nums) => {
       for (let num of nums) {
         const combination = [...table[i], num]
 
-        // check if further position is null/undefined/falsy or value length is longer than current combination.
+        // check if further position is null/undefined/falsy or value length is
+        // longer than current combination.
         if (!table[i + num] || combination.length < table[i + num].length) {
           table[i + num] = combination
         }
