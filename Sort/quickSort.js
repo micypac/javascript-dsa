@@ -19,6 +19,8 @@
       with the element at the pivot index(note!!! pivot is still at the start, pivot index is getting incremented since we are swapping all
       values < pivot together. smaller will end up on left of pivot and larger will be on right)
   - swap the starting element("the pivot") with the pivot index
+
+  !!! This performs an in-place operation and updates the array in place.
 */
 
 const pivot = (arr, start = 0, end = arr.length - 1) => {
@@ -58,7 +60,10 @@ const quickSort = (arr, left = 0, right = arr.length - 1) => {
   return arr
 }
 
+
+
 //*** Codevolution implementation withour using helper function and higher space complexity. */
+// this also does out-of-place sorting and utilizes extra spaces.
 const quickSort2 = (arr) => {
   if (arr.length < 2) {
     return arr
@@ -83,4 +88,6 @@ const quickSort2 = (arr) => {
 const data1 = [4, 8, 2, 1, 5, 7, 6, 3]
 const data2 = [4, 8, 2, 1, 5, 7, 6, 3]
 console.log(quickSort(data1))
+console.log("data1", data1)
 console.log(quickSort2(data2))
+console.log("data2", data2)
